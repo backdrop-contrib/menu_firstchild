@@ -58,7 +58,6 @@ function _menu_firstchild_get_firstchild_href($mlid) {
   while ($m = db_fetch_array($result)) {
     if ($m['link_path'] != '<firstchild>') {
       $child = menu_link_load($m['mlid']);
-      //drupal_set_message(print_r($child, TRUE));
       if (!empty($child['access']) && empty($child['hidden'])
        && (!isset($child['localized_options']['langcode']) || ($child['localized_options']['langcode'] == $language->language))) {
         return $m['link_path'];
