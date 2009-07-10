@@ -1,0 +1,18 @@
+// $Id$
+
+MENU FIRSTCHILD
+
+DESCRIPTION
+By default, Drupal 6 requires that you enter a path for each menu link you add/edit from the Menu administration page.
+There are cases you may want to create a parent item, without any path, that simply links to its first viewable child item.
+Menu Firstchild provides this functionality.
+
+INSTALLATION
+Copy the menu_firstchild folder to your sites/all/modules directory.
+Navigate to admin/build/modules and enable the module
+Navigate to admin/build/menu and click on the menu you to customize
+Add a new menu link or edit an existing link then enter <firstchild> as the link path to turn it into a 
+
+CONTACT
+Henri MEDOT <henri.medot[AT]absyx[DOT]fr>
+http://www.absyx.fr
