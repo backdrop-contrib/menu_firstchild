@@ -53,11 +53,16 @@ function menu_firstchild_translated_menu_link_alter(&$item, $map) {
 }
 
 function _menu_firstchild_get_firstchild_href($mlid) {
+  global $language;
   $result = db_query("SELECT mlid, link_path FROM {menu_links} WHERE plid = %d ORDER BY weight ASC", $mlid);
   while ($m = db_fetch_array($result)) {
     if ($m['link_path'] != '<firstchild>') {
       $child = menu_link_load($m['mlid']);
-      return (!empty($child['access'])) ? $m['link_path'] : NULL;
+      //drupal_set_message(print_r($child, TRUE));
+      if (!empty($child['access']) && empty($child['hidden'])
+       && (!isset($child['localized_options']['langcode']) || ($child['localized_options']['langcode'] == $language->language))) {
+        return $m['link_path'];
+      }
     }
     else {
       $href = _menu_firstchild_get_firstchild_href($m['mlid']);

@@ -13,6 +13,10 @@ Navigate to admin/build/modules and enable the module
 Navigate to admin/build/menu and click on the menu you to customize
 Add a new menu link or edit an existing link then enter <firstchild> as the link path to turn it into a parent item linking to its first viewable child.
 
+UPDATING
+Replace the older menu_firstchild folder by the newer one.
+Visit update.php.
+
 CONTACT
 Henri MEDOT <henri.medot[AT]absyx[DOT]fr>
 http://www.absyx.fr
