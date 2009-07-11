@@ -15,7 +15,17 @@ Add a new menu link or edit an existing link then enter <firstchild> as the link
 
 UPDATING
 Replace the older menu_firstchild folder by the newer one.
+Then...
+
+Updating from v6.0:
 Visit update.php.
+
+Updating from v6.1:
+After updating, go back to your menus' "Edit Menu Items" pages (e.g. /admin/build/menu-customize/primary-links).
+If there are <firstchild> menu items disabled when they should not, just enable them again and save changes. They will keep their states now.
+
+KNOWN ISSUES
+Breadcrumb might be wrong. This is not a bug of Menu Firstchild but a problem linked to Drupal's poor default breadcrumb system.
 
 CONTACT
 Henri MEDOT <henri.medot[AT]absyx[DOT]fr>
