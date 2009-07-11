@@ -44,9 +44,11 @@ function menu_firstchild_translated_menu_link_alter(&$item, $map) {
   if (($item['module'] == 'menu') && ($item['link_path'] == '<firstchild>')) {
     $href = _menu_firstchild_get_firstchild_href($item['mlid']);
     if ($href != NULL) {
+      unset($item['options']['unaltered_hidden']);
       $item['href'] = $href;
     }
     else {
+      $item['options']['unaltered_hidden'] = (bool)$item['hidden'];
       $item['hidden'] = TRUE;
     }
   }
@@ -71,4 +73,29 @@ function _menu_firstchild_get_firstchild_href($mlid) {
     }
   }
   return NULL;
+}
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function menu_firstchild_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'menu_overview_form') {
+    foreach ($form as $key => $value) {
+      if (is_array($value) && isset($value['#item']['options']['unaltered_hidden'])) {
+        $item = $value['#item'];
+        $unaltered_hidden = $item['options']['unaltered_hidden'];
+        $form[$key]['hidden']['#default_value'] = !$unaltered_hidden;
+        $form[$key]['#attributes']['class'] = $unaltered_hidden ? 'menu-disabled' : 'menu-enabled';
+        $form[$key]['title']['#value'] = check_plain($item['title']) . ($unaltered_hidden ? ' ('. t('disabled') .')' : '');
+      }
+    }
+  }
+  elseif ($form_id == 'menu_edit_item') {
+    if (isset($form['menu']['link_path'])) {
+      $form['menu']['link_path']['#description'] .= t(' Enter %firstchild to link to the item\'s first accessible child.', array('%firstchild' => '<firstchild>'));
+      if (isset($form['menu']['#item']['options']['unaltered_hidden'])) {
+        $form['menu']['enabled']['#default_value'] = !$form['menu']['#item']['options']['unaltered_hidden'];
+      }
+    }
+  }
 }
