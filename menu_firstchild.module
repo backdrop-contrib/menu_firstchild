@@ -32,8 +32,13 @@ function _menu_firstchild_menu() {
  * Implementation of hook_menu_link_alter().
  */
 function menu_firstchild_menu_link_alter(&$item, $menu) {
-  if (($item['module'] == 'menu') && ($item['link_path'] == '<firstchild>')) {
-    $item['options']['alter'] = TRUE;
+  if ($item['module'] == 'menu') {
+    if ($item['link_path'] == '<firstchild>') {
+      $item['options']['alter'] = TRUE;
+    }
+    else {
+      unset($item['options']['unaltered_hidden']);
+    }
   }
 }
 
