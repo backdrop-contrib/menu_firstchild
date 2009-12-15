@@ -49,10 +49,13 @@ function menu_firstchild_translated_menu_link_alter(&$item, $map) {
   if (($item['module'] == 'menu') && ($item['link_path'] == '<firstchild>')) {
     $href = _menu_firstchild_get_firstchild_href($item['mlid']);
     if ($href != NULL) {
-      unset($item['options']['unaltered_hidden']);
+      if (isset($item['options']['unaltered_hidden'])) {
+        $item['hidden'] = (bool)$item['options']['unaltered_hidden'];
+        unset($item['options']['unaltered_hidden']);
+      }
       $item['href'] = $href;
     }
-    else {
+    elseif (!isset($item['options']['unaltered_hidden'])) {
       $item['options']['unaltered_hidden'] = (bool)$item['hidden'];
       $item['hidden'] = TRUE;
     }
@@ -61,7 +64,7 @@ function menu_firstchild_translated_menu_link_alter(&$item, $map) {
 
 function _menu_firstchild_get_firstchild_href($mlid) {
   global $language;
-  $result = db_query("SELECT mlid, link_path FROM {menu_links} WHERE plid = %d ORDER BY weight ASC", $mlid);
+  $result = db_query("SELECT mlid, link_path FROM {menu_links} WHERE plid = %d ORDER BY weight, link_title", $mlid);
   while ($m = db_fetch_array($result)) {
     if ($m['link_path'] != '<firstchild>') {
       $child = menu_link_load($m['mlid']);
