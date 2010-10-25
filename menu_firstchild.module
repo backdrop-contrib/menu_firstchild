@@ -88,6 +88,7 @@ function menu_firstchild_form_alter(&$form, $form_state, $form_id) {
       if (isset($value['#item']['href']) && ($value['#item']['href'] == '<firstchild>')) {
         $item = $value['#item'];
         $unaltered_hidden = $item['options']['unaltered_hidden'];
+        $form[$key]['#item']['hidden'] = $unaltered_hidden;
         $form[$key]['hidden']['#default_value'] = !$unaltered_hidden;
         $form[$key]['#attributes']['class'] = $unaltered_hidden ? 'menu-disabled' : 'menu-enabled';
         $form[$key]['title']['#value'] = check_plain($item['title']) . ($unaltered_hidden ? ' ('. t('disabled') .')' : '');
