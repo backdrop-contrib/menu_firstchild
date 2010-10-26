@@ -95,7 +95,7 @@ function menu_firstchild_form_alter(&$form, $form_state, $form_id) {
       }
     }
   }
-  elseif (($form_id == 'menu_edit_item') && isset($form['link_path'])) {
+  elseif (($form_id == 'menu_edit_item') && isset($form['link_path']['#description'])) {
     $form['link_path']['#description'] .= t(' Enter %firstchild to link to the item\'s first accessible child.', array('%firstchild' => '<firstchild>'));
     if (isset($form['options']['#value']['unaltered_hidden'])) {
       $form['enabled']['#default_value'] = !$form['options']['#value']['unaltered_hidden'];
