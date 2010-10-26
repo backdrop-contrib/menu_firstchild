@@ -60,17 +60,17 @@ function menu_firstchild_translated_menu_link_alter(&$item, $map) {
 
 function _menu_firstchild_get_firstchild_href($mlid) {
   global $language;
-  $result = db_query("SELECT mlid, link_path FROM {menu_links} WHERE plid = %d ORDER BY weight, link_title", $mlid);
-  while ($m = db_fetch_array($result)) {
-    if ($m['link_path'] != '<firstchild>') {
-      $child = menu_link_load($m['mlid']);
+  $result = db_query('SELECT mlid, link_path FROM {menu_links} WHERE plid = :plid ORDER BY weight, link_title', array(':plid' => $mlid));
+  foreach ($result as $m) {
+    if ($m->link_path != '<firstchild>') {
+      $child = menu_link_load($m->mlid);
       if (!empty($child['access']) && empty($child['hidden'])
        && (!isset($child['localized_options']['langcode']) || ($child['localized_options']['langcode'] == $language->language))) {
-        return $m['link_path'];
+        return $m->link_path;
       }
     }
     else {
-      $href = _menu_firstchild_get_firstchild_href($m['mlid']);
+      $href = _menu_firstchild_get_firstchild_href($m->mlid);
       if ($href != NULL) {
         return $href;
       }
@@ -90,15 +90,15 @@ function menu_firstchild_form_alter(&$form, $form_state, $form_id) {
         $unaltered_hidden = $item['options']['unaltered_hidden'];
         $form[$key]['#item']['hidden'] = $unaltered_hidden;
         $form[$key]['hidden']['#default_value'] = !$unaltered_hidden;
-        $form[$key]['#attributes']['class'] = $unaltered_hidden ? 'menu-disabled' : 'menu-enabled';
-        $form[$key]['title']['#value'] = check_plain($item['title']) . ($unaltered_hidden ? ' ('. t('disabled') .')' : '');
+        $form[$key]['#attributes']['class'] = $unaltered_hidden ? array('menu-disabled') : array('menu-enabled');
+        $form[$key]['title']['#markup'] = check_plain($item['title']) . ($unaltered_hidden ? ' ('. t('disabled') .')' : '');
       }
     }
   }
-  elseif (($form_id == 'menu_edit_item') && isset($form['menu']['link_path'])) {
-    $form['menu']['link_path']['#description'] .= t(' Enter %firstchild to link to the item\'s first accessible child.', array('%firstchild' => '<firstchild>'));
-    if (isset($form['menu']['#item']['options']['unaltered_hidden'])) {
-      $form['menu']['enabled']['#default_value'] = !$form['menu']['#item']['options']['unaltered_hidden'];
+  elseif (($form_id == 'menu_edit_item') && isset($form['link_path'])) {
+    $form['link_path']['#description'] .= t(' Enter %firstchild to link to the item\'s first accessible child.', array('%firstchild' => '<firstchild>'));
+    if (isset($form['options']['#value']['unaltered_hidden'])) {
+      $form['enabled']['#default_value'] = !$form['options']['#value']['unaltered_hidden'];
     }
   }
 }

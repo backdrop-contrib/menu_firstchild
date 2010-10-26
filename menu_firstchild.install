@@ -10,37 +10,26 @@
  * Implementation of hook_install().
  */
 function menu_firstchild_install() {
-  $ret = array();
-  
-  // Add custom index to menu_links table.
-  db_add_index($ret, 'menu_links', 'plid', array('plid'));
+  db_add_index('menu_links', 'plid', array('plid'));
 }
 
 /**
  * Implementation of hook_uninstall().
  */
 function menu_firstchild_uninstall() {
-  $ret = array();
-  
-  // Drop custom index.
-  db_drop_index($ret, 'menu_links', 'plid');
+  db_drop_index('menu_links', 'plid');
 }
 
 /**
  * Implementation of hook_schema_alter().
  */
 function menu_firstchild_schema_alter(&$schema) {
-  // Add index for plid to {menu_links}.
   $schema['menu_links']['indexes']['plid'] = array('plid');
 }
 
 /**
  * Implementation of hook_update_N().
  */
-function menu_firstchild_update_6001() {
-  $ret = array();
-  
-  // Add custom index to menu_links table.
-  db_add_index($ret, 'menu_links', 'plid', array('plid'));
-  return $ret;
+function menu_firstchild_update_6001(&$sandbox) {
+  db_add_index('menu_links', 'plid', array('plid'));
 }
