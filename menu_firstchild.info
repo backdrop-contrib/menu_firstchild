@@ -1,7 +1,6 @@
 ; $Id$
 name = Menu Firstchild
 description = Allows to create parent menu items without path that link to their first viewable children.
-version = VERSION
 core = 7.x
 dependencies[] = menu
 files[] = menu_firstchild.module
