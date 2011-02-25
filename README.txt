@@ -1,4 +1,3 @@
-// $Id$
 
 MENU FIRSTCHILD
 http://drupal.org/project/menu_firstchild

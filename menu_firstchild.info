@@ -1,4 +1,3 @@
-; $Id$
 name = Menu Firstchild
 description = Allows to create parent menu items without path that link to their first viewable children.
 core = 7.x
