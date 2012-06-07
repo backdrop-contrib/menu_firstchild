@@ -50,6 +50,7 @@ function menu_firstchild_translated_menu_link_alter(&$item, $map) {
     $href = _menu_firstchild_get_firstchild_href($item['mlid']);
     if ($href != NULL) {
       $item['href'] = $href;
+      $item['localized_options']['attributes']['class'][] = 'menu-firstchild';
     }
     else {
       $item['hidden'] = TRUE;
