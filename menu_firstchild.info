@@ -1,4 +1,5 @@
 name = Menu Firstchild
 description = Allows to create parent menu items without path that link to their first viewable children.
 backdrop = 1.x
+type = module
 dependencies[] = menu
