@@ -1,15 +1,53 @@
+Menu First Child
+======================
 
-MENU FIRSTCHILD
-http://drupal.org/project/menu_firstchild
+Menu Firstchild enables you to create a parent item, without any path, that
+links to its first viewable child item.
 
-DESCRIPTION
-By default, Drupal requires that you enter a path for each menu link you add/edit from the Menu administration page.
-There are cases you may want to create a parent item, without any path, that simply links to its first viewable child item.
-Menu Firstchild provides this functionality.
+This module makes alterations to menu items so that "<firstchild>" can be
+used to send the visitor to the first viewable child item below the menu
+item that uses it. Similar in fashion to how "<front>" is used in paths for
+going to the front page.
 
-INSTALLATION
-Please read instructions at: http://drupal.org/project/menu_firstchild
+Simply by installing and enabling the module, the functionality of
+"<firstchild>" becomes available.
 
-CONTACT
-Henri MEDOT <henri.medot[AT]absyx[DOT]fr>
-http://www.absyx.fr
+Installation
+------------
+
+- Install this module using the official Backdrop CMS instructions at
+  https://backdropcms.org/guide/modules.
+
+- Navigate to admin/structure/menu and choose the menu you want to customize.
+
+- Add a new menu link or edit an existing link then enter <firstchild> as the
+  link path to turn it into a parent item linking to its first accessible child.
+
+Documentation
+-------------
+
+Additional documentation is located in the Wiki:
+N/A
+
+Issues
+------
+
+Bugs and Feature requests should be reported in the Issue Queue:
+N/A
+
+Current Maintainers
+-------------------
+
+- Owen Morrill (https://github.com/owenmorrill).
+
+Credits
+-------
+
+- Ported to Backdrop CMS by Owen Morrill (https://github.com/owenmorrill).
+- Originally written for Drupal by Henri MEDOT (https://www.drupal.org/u/anrikun).
+
+License
+-------
+
+This project is GPL v2 software. See the LICENSE.txt file in this directory for
+complete text.

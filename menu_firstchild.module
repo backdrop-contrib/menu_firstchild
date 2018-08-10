@@ -24,7 +24,7 @@ function menu_firstchild_menu() {
 }
 
 function _menu_firstchild_menu() {
-  return drupal_not_found();
+  return menu_not_found();
 }
 
 /**
