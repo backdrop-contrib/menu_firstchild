@@ -12,6 +12,8 @@ going to the front page.
 Simply by installing and enabling the module, the functionality of
 "<firstchild>" becomes available.
 
+This module has been ported from version 7.x-1.1+1-dev.
+
 Installation
 ------------
 
